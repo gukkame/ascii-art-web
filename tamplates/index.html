@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ascii art</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+    />
+    <link type="text/css" rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="wrapper">
+          <div>
+            <h1 class="text-primary mb-auto">Ascii art!</h1>
+          </div>
+          <form method="POST" action="/ascii-art" target="asciiart">
+            <div class="button1" >
+              <input type="radio" name="textstyle" value="shadow" />Shadow
+              &emsp;
+              <input type="radio" name="textstyle" value="standard" checked />Standard
+              &emsp;
+              <input
+                type="radio"
+                name="textstyle"
+                value="thinkertoy"
+              />Thinkertoy &emsp;
+              <button
+                class="btn btn-primary rounded-1"
+                type="submit"
+                data-toggle="modal"
+                data-target="#addNewTitleModal"
+              >
+                Apply changes
+              </button>
+            </div>
+            <br />
+            <div class="form-outline">
+              <input type="text"
+                name="text"
+                class="form-control form-control-lg"
+                placeholder="Enter text"
+                rows="4"
+                required>
+              
+            </div>
+          </form>
+          <div class="table-responsive">
+            <table
+              class="
+                table table-striped table-borderless
+                text-center
+                table table-hover
+              "
+            >
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <class class="wrapper2">
+          <div>
+            
+            <h1 class="text-primary mb-auto">Output</h1>
+          </div>
+          
+              <text><pre><br>{{.AsciiString}}</pre> </text>
+            </class>
+            
+          <div class="table-responsive">
+            
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="main.go"></script>
+  </body>
+</html>
