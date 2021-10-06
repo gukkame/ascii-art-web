@@ -40,6 +40,11 @@ body{
   transform: scale(5);
   margin: 30px;
 }
+.txtoverflow{
+  overflow-x: auto;
+  
+}
+
 
 
 

@@ -18,12 +18,16 @@
           <div>
             <h1 class="text-primary mb-auto">Ascii art!</h1>
           </div>
-          <form method="POST" action="/ascii-art" target="asciiart">
-            <div class="button1" >
+          <form method="POST" action="/ascii-art" target="ascii-art">
+            <div class="button1">
               <input type="radio" name="textstyle" value="shadow" />Shadow
               &emsp;
-              <input type="radio" name="textstyle" value="standard" checked />Standard
-              &emsp;
+              <input
+                type="radio"
+                name="textstyle"
+                value="standard"
+                checked
+              />Standard &emsp;
               <input
                 type="radio"
                 name="textstyle"
@@ -40,13 +44,14 @@
             </div>
             <br />
             <div class="form-outline">
-              <input type="text"
+              <input
+                type="text"
                 name="text"
                 class="form-control form-control-lg"
                 placeholder="Enter text"
                 rows="4"
-                required>
-              
+                required
+              />
             </div>
           </form>
           <div class="table-responsive">
@@ -67,18 +72,20 @@
       <div class="row">
         <class class="wrapper2">
           <div>
-            
             <h1 class="text-primary mb-auto">Output</h1>
           </div>
-          
-              <text><pre><br>{{.AsciiString}}</pre> </text>
-            </class>
-            
-          <div class="table-responsive">
-            
-              <tbody></tbody>
-            </table>
-          </div>
+
+          <iframe
+            class="form-control form-control-lg"
+            name="ascii-art"
+            id="ascii-art"
+            style="height: 300px"
+            ><br
+          /></iframe>
+        </class>
+
+        <div class="table-responsive">
+          <tbody></tbody>
         </div>
       </div>
     </div>

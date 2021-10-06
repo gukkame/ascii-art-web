@@ -8,17 +8,11 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"text/template"
 )
 
-type Asciiart struct {
-	AsciiText   []string
-	AsciiString string
-}
+func asciihandler(w http.ResponseWriter, r *http.Request) {
 
-func hello(w http.ResponseWriter, r *http.Request) {
-
-	if r.URL.Path != "/" && r.URL.Path != "/ascii-art" {
+	if r.URL.Path != "/ascii-art" {
 		http.Error(w, "404 not found.", http.StatusNotFound)
 		return
 	}
@@ -26,6 +20,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
 		http.ServeFile(w, r, "tamplates/index.html")
+		return
 
 	case "POST":
 		// Call ParseForm() to parse the raw query and update r.PostForm and r.Form.
@@ -34,20 +29,14 @@ func hello(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		var asciiarr []string
-		// fmt.Fprintf(w, "Post from website! r.PostFrom = %v\n", r.PostForm)
 		intext := r.FormValue("text")
 		asciiarr = append(asciiarr, intext)
+		asciiarr = append(asciiarr, r.Form.Get("textstyle")+".txt")
 
-		slice := []string{"shadow", "standard", "thinkertoy"}
-
-		for _, v := range slice {
-			if v == r.Form.Get("textstyle") {
-				asciiarr = append(asciiarr, v+".txt")
-			}
-		}
 		fmt.Println(asciiarr[0])
 		fmt.Println(asciiarr[1])
 		fmt.Println(len(asciiarr))
+
 		var s []string
 		if len(asciiarr) > 1 {
 
@@ -74,22 +63,8 @@ func hello(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("Please enter more than 0 arguments")
 		}
 
-		art := Asciiart{
-			AsciiText:   s,
-			AsciiString: strings.Join(s, ""),
-		}
-		fmt.Println(art.AsciiString)
-		//address := r.FormValue("address")
-		// fmt.Fprintf(w, "Name = %s\n", intext)
-		// fmt.Fprintf(w, "Art = %s\n", art)
-
-		parsedTemplate, _ := template.ParseFiles("tamplates/index.html")
-		err := parsedTemplate.Execute(w, art)
-
-		if err != nil {
-			log.Println("Error executing template :", err)
-			return
-		}
+		AsciiString := strings.Join(s, "")
+		fmt.Fprintf(w, AsciiString)
 		//fmt.Fprintf(w, "Address = %s\n", address)
 	default:
 		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
@@ -97,8 +72,8 @@ func hello(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", hello)
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./css/"))))
+	http.Handle("/", http.FileServer(http.Dir("./tamplates")))
+	http.HandleFunc("/ascii-art", asciihandler)
 
 	fmt.Printf("Starting server for testing HTTP POST...\n")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -114,14 +89,11 @@ func Printer(input, fontName string, originalArray []int) (s []string) {
 			s = append(s, oneLineofOneLetter)
 
 		}
-		//s = append(s, " ")
 		s = append(s, "\n")
 		fmt.Print(" ")
 		fmt.Print("\n") //and start a new line again
 	}
 	return s
-	/* 	fmt.Println(len(s))
-	   	fmt.Println(s) */
 
 }
 
