@@ -25,7 +25,7 @@ body{
 }
 .wrapper2{
   background: #fff;
-  max-width: 750px;
+  max-width: 900px;
   width: 100%;
   margin: 0px auto;
   padding: 25px;
@@ -40,9 +40,11 @@ body{
   transform: scale(5);
   margin: 30px;
 }
-.txtoverflow{
+
+#ascii-art{
   overflow-x: auto;
-  
+  width: 850px;
+  height: 200x;
 }
 
 
