@@ -12,11 +12,6 @@ import (
 
 var banner string
 
-type Asciiart struct {
-	AsciiText   []string
-	AsciiString string
-}
-
 func ReadLine(fn string, n int) string { // Returns the requested line in the font file
 	f, _ := os.Open(fn)
 	defer f.Close()
@@ -76,13 +71,8 @@ func asciihandler(w http.ResponseWriter, r *http.Request) {
 		banner = r.Form.Get("textstyle") + ".txt"
 		result := asciiArt(inputText)
 
-		art := Asciiart{
-			AsciiText:   result,
-			AsciiString: strings.Join(result, ""),
-		}
-
 		parsedTemplate, _ := template.ParseFiles("tamplates/asciiArt.html")
-		err := parsedTemplate.Execute(w, art)
+		err := parsedTemplate.Execute(w, strings.Join(result, ""))
 
 		if err != nil {
 			log.Println("Error executing template :", err)
