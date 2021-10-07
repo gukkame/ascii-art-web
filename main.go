@@ -29,7 +29,11 @@ func asciiArt(text string) []string {
 
 	for _, v := range text {
 		if int(v) > 126 || int(v) < 32 {
-			log.Fatal("non ascii character")
+			for i := 0; i < len(result); i++ {
+				result[i] = ""
+			}
+			result = append(result, "Non ascii character")
+			return result
 		}
 	}
 
