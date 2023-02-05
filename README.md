@@ -5,9 +5,14 @@ Changes text into different Ascii art letters
 
 How to run
 -------------------------
-Open project and run main.go to start the server.
-Open http://localhost:8080 in your browser and change some text into Ascii art. Enjoy! 
+* Clone project
+* Run main.go 
+* Open http://localhost:8080 in your browser 
 
+
+Project requirements
+-------------------------
+`https://01.kood.tech/git/root/public/src/branch/master/subjects/ascii-art-web`
 
 Authors
 -------------------------
